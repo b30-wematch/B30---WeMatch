@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Early Potty Training</string>
-    <string name="title_iteration_one">Iteration 1</string>
-    <string name="title_iteration_two">Iteration 2</string>
-    <string name="title_iteration_three">Iteration 3</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-</resources>
