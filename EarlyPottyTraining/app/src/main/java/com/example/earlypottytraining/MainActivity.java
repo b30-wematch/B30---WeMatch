@@ -1,11 +1,16 @@
 package com.example.earlypottytraining;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.earlypottytraining.fragment_nav.IterationOne;
+import com.example.earlypottytraining.fragment_nav.IterationThree;
+import com.example.earlypottytraining.fragment_nav.IterationTwo;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
@@ -17,13 +22,20 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+
+                    IterationOne iterOne = new IterationOne();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,iterOne,"Iteration One")
+                            .commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    IterationTwo iterTwo = new IterationTwo();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,iterTwo,"Iteration One")
+                            .commit();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    IterationThree iterThree = new IterationThree();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,iterThree,"Iteration One")
+                            .commit();
                     return true;
             }
             return false;
