@@ -37,7 +37,6 @@ public class Home extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -52,7 +51,8 @@ public class Home extends Fragment {
 
         //update time info
         updateDate();
-
+        //update location
+        updateLocation(getArguments());
 
         return view;
     }
@@ -78,12 +78,14 @@ public class Home extends Fragment {
         }
     }
 
-    public void updateWeather(){
+    public void updateWeather() {
 
     }
 
-    public void updateLocation(){
-
+    public void updateLocation(Bundle bundle) {
+        double latitude = bundle.getDouble("latitude");
+        double longitude = bundle.getDouble("longitude");
+        tv_location.setText("Location: " + latitude + "," + longitude);
     }
 
 
