@@ -28,8 +28,6 @@ import com.example.earlypottytraining.activity.Methods;
  */
 public class IterationOne extends Fragment {
 
-    ViewPager vp_methods;
-    ViewPager vp_maps;
     Button btn_methods;
     Button btn_maps;
 
@@ -45,8 +43,6 @@ public class IterationOne extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_iteration_one, container, false);
-        vp_methods = (ViewPager) view.findViewById(R.id.vp_methods);
-        vp_maps = (ViewPager) view.findViewById(R.id.vp_maps);
         btn_methods = (Button) view.findViewById(R.id.btn_methods);
         btn_maps = (Button) view.findViewById(R.id.btn_maps);
 

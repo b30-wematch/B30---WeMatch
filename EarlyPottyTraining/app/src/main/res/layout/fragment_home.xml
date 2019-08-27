@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_home"
     tools:context=".fragment_nav.Home">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,10 +15,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="63dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginRight="76dp"
-        android:text="Good Morning" />
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:text="Greetings" />
 
     <TextView
         android:id="@+id/tv_date"
@@ -28,8 +29,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="26dp"
         android:layout_marginLeft="26dp"
-        android:layout_marginTop="154dp"
-        android:text="27th Aug, 2019" />
+        android:layout_marginTop="79dp"
+        android:text="Loading Date..." />
 
     <TextView
         android:id="@+id/tv_temperature"
@@ -38,9 +39,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="261dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="174dp"
         android:text="20 C" />
 
     <TextView
@@ -50,9 +51,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="79dp"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="384dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginLeft="58dp"
+        android:layout_marginTop="299dp"
         android:text="Caufield" />
 
 </RelativeLayout>
