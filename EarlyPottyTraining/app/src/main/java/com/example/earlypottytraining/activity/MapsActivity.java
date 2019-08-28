@@ -8,7 +8,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.earlypottytraining.R;
 
@@ -92,7 +95,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mMap.addMarker(new MarkerOptions().position(location).title(name));
         }
+        addMaker(new LatLng(-37.8136, 144.9631), googleMap);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-37.8136, 144.9631), 12.0f));
+    }
+
+    public void addMaker(LatLng location, GoogleMap googleMap) {
+        GoogleMap map = googleMap;
+        if (map != null) {
+            MarkerOptions options = new MarkerOptions();
+//            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.flag_china);
+//            options.icon(icon);
+            options.position(location).title("You Are Here");
+            map.addMarker(options);
+        }
     }
 
 }

@@ -38,7 +38,7 @@ public class Home extends Fragment {
 
     TextView tv_greeting;
     TextView tv_date;
-    TextView tv_temperature;
+    //TextView tv_temperature;
     TextView tv_location;
     ImageView ic_location;
 
@@ -55,26 +55,26 @@ public class Home extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         tv_greeting = (TextView) view.findViewById(R.id.tv_greeting);
         tv_date = (TextView) view.findViewById(R.id.tv_date);
-        tv_temperature = (TextView) view.findViewById(R.id.tv_temperature);
+        //tv_temperature = (TextView) view.findViewById(R.id.tv_temperature);
         tv_location = (TextView) view.findViewById(R.id.tv_location);
         ic_location = (ImageView) view.findViewById(R.id.ic_location);
         //update time info
         updateDate();
         //update location
         updateLocation(getArguments());
-        updateWeather(getArguments());
+        //updateWeather(getArguments());
 
         return view;
     }
 
     public void updateDate() {
         Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE., d MMM. yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE. d MMM. yyyy");
         String dateStr = sdf.format(date);
 
         //update day info
         tv_date.setText(dateStr);
-
+        tv_date.setTextSize(20);
         //update greeting
         int hour = date.getHours();
         if (hour < 5) {
@@ -86,6 +86,7 @@ public class Home extends Fragment {
         } else {
             tv_greeting.setText("Good Evening");
         }
+        tv_greeting.setTextSize(32);
     }
 
     public void updateWeather(Bundle bundle) {
@@ -104,7 +105,7 @@ public class Home extends Fragment {
             e.printStackTrace();
         }
         int temp = (int) (Double.parseDouble(tempValue) - 273.15);
-        tv_temperature.setText(String.valueOf(temp));
+        //tv_temperature.setText(String.valueOf(temp));
     }
 
     public void updateLocation(Bundle bundle) {
