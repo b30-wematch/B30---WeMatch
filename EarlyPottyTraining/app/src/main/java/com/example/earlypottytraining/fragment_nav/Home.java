@@ -1,6 +1,7 @@
 package com.example.earlypottytraining.fragment_nav;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,8 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.earlypottytraining.ActivityCollection;
 import com.example.earlypottytraining.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -53,6 +59,7 @@ public class Home extends Fragment {
         updateDate();
         //update location
         updateLocation(getArguments());
+        updateWeather(getArguments());
 
         return view;
     }
@@ -68,18 +75,33 @@ public class Home extends Fragment {
         //update greeting
         int hour = date.getHours();
         if (hour < 5) {
-            tv_greeting.setText("Good Night");
+            tv_greeting.setText("Good Night"+hour);
         } else if (hour < 12) {
-            tv_greeting.setText("Good Morning");
-        } else if (hour < 6) {
-            tv_greeting.setText("Good Afternoon");
+            tv_greeting.setText("Good Morning"+hour);
+        } else if (hour < 18) {
+            tv_greeting.setText("Good Afternoon"+hour);
         } else {
-            tv_greeting.setText("Good Evening");
+            tv_greeting.setText("Good Evening"+hour);
         }
     }
 
-    public void updateWeather() {
-
+    public void updateWeather(Bundle bundle) {
+        SharedPreferences sharedPreferences = (SharedPreferences) getActivity()
+                .getSharedPreferences("weather", Context.MODE_PRIVATE);
+        String weatherJson = sharedPreferences.getString("weather", "Error");
+        JSONObject jsonObject = null;
+        String tempValue = null;
+        String weatherValue = null;
+        try {
+            jsonObject = new JSONObject(weatherJson);
+            JSONObject jsonChild = new JSONObject(jsonObject.get("main").toString());
+            tempValue = jsonChild.get("temp").toString();
+            weatherValue = jsonChild.get("temp").toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        int temp = (int) (Double.parseDouble(tempValue) - 273.15);
+        tv_temperature.setText(String.valueOf(temp));
     }
 
     public void updateLocation(Bundle bundle) {

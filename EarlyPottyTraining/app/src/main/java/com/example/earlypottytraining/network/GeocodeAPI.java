@@ -4,6 +4,7 @@ import com.example.earlypottytraining.Common;
 
 public class GeocodeAPI extends CommonAPI {
 
+    public static final String GEOCODE_API_PATH = Common.GEOCODE_API + Common.GOOGLE_GEOCODING_API_KEY;
     @Override
     public Method requestMenthod() {
         return Method.GET;
@@ -11,6 +12,6 @@ public class GeocodeAPI extends CommonAPI {
 
     @Override
     public String getUrl() {
-        return Common.GEOCODE_API;
+        return GEOCODE_API_PATH;
     }
 }

@@ -4,10 +4,12 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.annotation.NonNull;
@@ -23,6 +25,8 @@ import com.example.earlypottytraining.fragment_nav.Home;
 import com.example.earlypottytraining.fragment_nav.IterationOne;
 import com.example.earlypottytraining.fragment_nav.IterationThree;
 import com.example.earlypottytraining.fragment_nav.IterationTwo;
+import com.example.earlypottytraining.network.CommonAPI;
+import com.example.earlypottytraining.network.WeatherAPI;
 
 
 public class MainActivity extends BaseActivity {
@@ -77,8 +81,12 @@ public class MainActivity extends BaseActivity {
 
         //load the location info
         Bundle bundle = getLngAndLat(this);
-        home.setArguments(bundle);
 
+        //load the weather info
+        new updateWeatherAsynTask().execute();
+
+        //pass value to Home
+        home.setArguments(bundle);
     }
 
     @Override
@@ -188,4 +196,21 @@ public class MainActivity extends BaseActivity {
         }
     };
 
+
+    private class updateWeatherAsynTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            return CommonAPI.getInfoByAPI(WeatherAPI.WEATHER_API_PATH);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            SharedPreferences sharedPreferences = ActivityCollection.getCurrentContext()
+                    .getSharedPreferences("weather", Context.MODE_PRIVATE);
+            SharedPreferences.Editor spEdit = sharedPreferences.edit();
+            spEdit.putString("weather", s);
+            spEdit.apply();
+        }
+    }
 }
