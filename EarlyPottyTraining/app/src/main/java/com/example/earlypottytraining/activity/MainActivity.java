@@ -29,6 +29,12 @@ import com.example.earlypottytraining.network.CommonAPI;
 import com.example.earlypottytraining.network.GeocodeAPI;
 import com.example.earlypottytraining.network.WeatherAPI;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends BaseActivity {
     private TextView mTextMessage;
@@ -89,6 +95,7 @@ public class MainActivity extends BaseActivity {
 
         //pass value to Home
         home.setArguments(bundle);
+
     }
 
     @Override

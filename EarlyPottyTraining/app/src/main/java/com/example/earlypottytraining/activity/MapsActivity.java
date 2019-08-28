@@ -2,6 +2,7 @@ package com.example.earlypottytraining.activity;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,6 +11,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.earlypottytraining.R;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -41,10 +48,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-37.8136, 144.9631);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-37.8136, 144.9631);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        //test
+        List<String> babyChangeList = new ArrayList<String>();
+        try {
+            InputStreamReader is = new InputStreamReader(getAssets().open("toilet_training.csv"));
+            BufferedReader reader = new BufferedReader(is);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                String[] str = line.split(",");
+                if (str[8].equals("TRUE")) {
+                    babyChangeList.add(str[2] + "," + str[3] + "," + str[8] + "," + str[9] + "," + str[10]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show();
+
+        for (String unit : babyChangeList) {
+            String[] cell = unit.split(",");
+            double latitude;
+            try {
+                latitude = Double.parseDouble(cell[3]);
+            } catch (Exception e) {
+                e.printStackTrace();
+                latitude = 0;
+            }
+            double longitude;
+            try {
+                longitude = Double.parseDouble(cell[4]);
+            } catch (Exception e) {
+                e.printStackTrace();
+                longitude = 0;
+            }
+            String name = cell[0];
+            String address = cell[1];
+            LatLng location = new LatLng(latitude, longitude);
+
+            mMap.addMarker(new MarkerOptions().position(location).title(name));
+        }
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-37.8136, 144.9631), 12.0f));
     }
 
 }
