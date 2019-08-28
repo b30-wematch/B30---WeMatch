@@ -93,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String address = cell[1];
             LatLng location = new LatLng(latitude, longitude);
 
-            mMap.addMarker(new MarkerOptions().position(location).title(name));
+            mMap.addMarker(new MarkerOptions().position(location).title(name).snippet(address));
         }
         addMaker(new LatLng(-37.8136, 144.9631), googleMap);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-37.8136, 144.9631), 12.0f));
