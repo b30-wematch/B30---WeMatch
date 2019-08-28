@@ -17,20 +17,20 @@
         android:id="@+id/btn_china"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/btn_china" />
 
     <Button
         android:id="@+id/btn_kenya"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/btn_kenya" />
 
     <Button
         android:id="@+id/btn_vietnam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/btn_vietnam" />
 </LinearLayout>
