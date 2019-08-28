@@ -15,45 +15,86 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:text="Greetings" />
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginRight="31dp"
+        android:text="Greetings"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_greeting"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="69dp"
-        android:layout_marginLeft="69dp"
-        android:layout_marginTop="122dp"
-        android:text="Loading Date..." />
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="69dp"
+        android:text="Loading Date..."
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_temperature"
-        android:layout_width="101dp"
-        android:layout_height="76dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_date"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="179dp"
-        android:text="20 C" />
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="11dp"
+        android:text="20"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_temperature"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="87dp"
+        android:layout_toEndOf="@+id/ic_location"
+        android:layout_toRightOf="@+id/ic_location"
+        android:text="Caufield" />
+
+    <ImageView
+        android:id="@+id/ic_location"
+        android:layout_width="38dp"
+        android:layout_height="41dp"
+        android:layout_below="@+id/tv_temperature"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/ic_location_on_black_24dp" />
+
+    <TextView
+        android:id="@+id/tv_temp_ic"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="74dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginTop="305dp"
-        android:text="Caufield" />
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="188dp"
+        android:layout_toEndOf="@+id/tv_ic"
+        android:layout_toRightOf="@+id/tv_ic"
+        android:text="C"
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/tv_ic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_date"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tv_temperature"
+        android:layout_toRightOf="@+id/tv_temperature"
+        android:text="。"
+        android:textSize="24sp" />
 
 </RelativeLayout>

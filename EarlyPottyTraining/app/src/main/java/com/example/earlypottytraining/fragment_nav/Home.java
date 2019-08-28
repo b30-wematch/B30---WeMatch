@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.earlypottytraining.ActivityCollection;
 import com.example.earlypottytraining.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +40,7 @@ public class Home extends Fragment {
     TextView tv_date;
     TextView tv_temperature;
     TextView tv_location;
+    ImageView ic_location;
 
 
     @Override
@@ -54,7 +57,7 @@ public class Home extends Fragment {
         tv_date = (TextView) view.findViewById(R.id.tv_date);
         tv_temperature = (TextView) view.findViewById(R.id.tv_temperature);
         tv_location = (TextView) view.findViewById(R.id.tv_location);
-
+        ic_location = (ImageView) view.findViewById(R.id.ic_location);
         //update time info
         updateDate();
         //update location
@@ -75,13 +78,13 @@ public class Home extends Fragment {
         //update greeting
         int hour = date.getHours();
         if (hour < 5) {
-            tv_greeting.setText("Good Night"+hour);
+            tv_greeting.setText("Good Night");
         } else if (hour < 12) {
-            tv_greeting.setText("Good Morning"+hour);
+            tv_greeting.setText("Good Morning");
         } else if (hour < 18) {
-            tv_greeting.setText("Good Afternoon"+hour);
+            tv_greeting.setText("Good Afternoon");
         } else {
-            tv_greeting.setText("Good Evening"+hour);
+            tv_greeting.setText("Good Evening");
         }
     }
 
@@ -90,8 +93,8 @@ public class Home extends Fragment {
                 .getSharedPreferences("weather", Context.MODE_PRIVATE);
         String weatherJson = sharedPreferences.getString("weather", "Error");
         JSONObject jsonObject = null;
-        String tempValue = null;
-        String weatherValue = null;
+        String tempValue = "";
+        String weatherValue = "";//need to imporve
         try {
             jsonObject = new JSONObject(weatherJson);
             JSONObject jsonChild = new JSONObject(jsonObject.get("main").toString());
@@ -105,9 +108,19 @@ public class Home extends Fragment {
     }
 
     public void updateLocation(Bundle bundle) {
-        double latitude = bundle.getDouble("latitude");
-        double longitude = bundle.getDouble("longitude");
-        tv_location.setText("Location: " + latitude + "," + longitude);
+        SharedPreferences sharedPreferences = (SharedPreferences) getActivity()
+                .getSharedPreferences("location", Context.MODE_PRIVATE);
+        String locationJson = sharedPreferences.getString("location", "Error");
+        String locationValue = "";
+        try {
+            JSONObject jsonObject = new JSONObject(locationJson);
+            JSONArray jsonArray = jsonObject.getJSONArray("results");
+            JSONObject jsonChild = new JSONObject(jsonArray.get(0).toString());
+            locationValue = jsonChild.get("formatted_address").toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        tv_location.setText(locationValue);
     }
 
 

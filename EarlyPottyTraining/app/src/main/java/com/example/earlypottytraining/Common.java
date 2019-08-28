@@ -8,11 +8,13 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 
 public class Common {
     public static final String GOOGLE_MAP_API_KEY = "AIzaSyBSAk3ZXxNRom0CmW9JWeIrPPhqOqWo9ok";
-    public static final String GOOGLE_GEOCODING_API_KEY = "AIzaSyA8cwM3yPCYhxGLUVX60ft9GXXcJURuo3E";
+    public static final String GOOGLE_GEOCODING_API_KEY = "&key=AIzaSyA8cwM3yPCYhxGLUVX60ft9GXXcJURuo3E";
     public static final String WEATHER_API_KEY = "d9ebb08c951c7888babdf138ab2ae372";
 
     public static final String WEATHER_API = "http://api.openweathermap.org/data/2.5/weather?q=Melbourne,au&appid=";
-    public static final String GEOCODE_API = "https://maps.googleapis.com/maps/api/geocode/json?latlng=-37.8136,144.963&key=";
+    //param
+    //-37.8136,144.963
+    public static final String GEOCODE_API = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
 
     public static void popMessage(String message) {
         popDialog(message, R.drawable.check_mark);

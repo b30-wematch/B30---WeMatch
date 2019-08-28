@@ -26,6 +26,7 @@ import com.example.earlypottytraining.fragment_nav.IterationOne;
 import com.example.earlypottytraining.fragment_nav.IterationThree;
 import com.example.earlypottytraining.fragment_nav.IterationTwo;
 import com.example.earlypottytraining.network.CommonAPI;
+import com.example.earlypottytraining.network.GeocodeAPI;
 import com.example.earlypottytraining.network.WeatherAPI;
 
 
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity {
 
         //load the location info
         Bundle bundle = getLngAndLat(this);
+        new updateLocationAsynTask().execute(bundle.getDouble("latitude", 0), bundle.getDouble("longitude", 0));
 
         //load the weather info
         new updateWeatherAsynTask().execute();
@@ -108,7 +110,7 @@ public class MainActivity extends BaseActivity {
         double latitude = 0.0;
         double longitude = 0.0;
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {  //从gps获取经纬度
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -124,10 +126,10 @@ public class MainActivity extends BaseActivity {
             if (location != null) {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
-            } else {//当GPS信号弱没获取到位置的时候又从网络获取
+            } else {
                 return getLngAndLatWithNetwork();
             }
-        } else {    //从网络获取经纬度
+        } else {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener);
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             if (location != null) {
@@ -210,6 +212,23 @@ public class MainActivity extends BaseActivity {
                     .getSharedPreferences("weather", Context.MODE_PRIVATE);
             SharedPreferences.Editor spEdit = sharedPreferences.edit();
             spEdit.putString("weather", s);
+            spEdit.apply();
+        }
+    }
+
+    private class updateLocationAsynTask extends AsyncTask<Double, Void, String> {
+
+        @Override
+        protected String doInBackground(Double... doubles) {
+            return CommonAPI.getInfoByAPI(new GeocodeAPI(doubles[0], doubles[1]).getUrl());
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            SharedPreferences sharedPreferences = ActivityCollection.getCurrentContext()
+                    .getSharedPreferences("location", Context.MODE_PRIVATE);
+            SharedPreferences.Editor spEdit = sharedPreferences.edit();
+            spEdit.putString("location", s);
             spEdit.apply();
         }
     }
